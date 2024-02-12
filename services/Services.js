@@ -9,6 +9,10 @@ class Services {
     return dataSouce[this.model].findAll();
   }
 
+  async pegaPorEscopo(escopo) {
+    return dataSouce[this.model].scope(escopo).findAll();
+  }
+
   async pegaUmRegistroPorId(id) {
     return dataSouce[this.model].findByPk(id);
   }
