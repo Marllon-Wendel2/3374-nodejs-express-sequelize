@@ -17,8 +17,8 @@ class Services {
     return dataSouce[this.model].findByPk(id);
   }
 
-  async criaRegistro(dadosDoNovoRegistro) {
-    return dataSouce[this.model].create(dadosDoNovoRegistro);
+  async criaRegistro(dadosDoRegistro) {
+    return dataSouce[this.model].create(dadosDoRegistro);
   }
 
   async atualizaRegistro(dadosAtualizados, id) {

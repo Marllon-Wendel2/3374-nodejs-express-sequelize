@@ -12,13 +12,13 @@ class Controller {
     }
   }
 
-  async criaRegistro(req, res) {
-    const dadosDoNovoRegistro = req.body;
+  async criaNovo(req, res) {
+    const dadosParaCriacao = req.body;
     try {
-      const novoRegistro = await this.entidadeService.criaRegistro(dadosDoNovoRegistro);
-      return res.status(200).json(novoRegistro);
+      const novoRegistroCriado = await this.entidadeService.criaRegistro(dadosParaCriacao);
+      return res.status(200).json(novoRegistroCriado);
     } catch (erro) {
-      res.status(400).json({mensagem : 'Erro ao cadastrar'});
+      return res.status(500).json({ erro: erro.message });
     }
   }
 
