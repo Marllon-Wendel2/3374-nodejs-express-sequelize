@@ -17,13 +17,17 @@ class Services {
     return dataSouce[this.model].findByPk(id);
   }
 
+  async pegaUmRegistro(where) {
+    return dataSouce[this.model].findOne( { where: { ...where } });
+  }
+
   async criaRegistro(dadosDoRegistro) {
     return dataSouce[this.model].create(dadosDoRegistro);
   }
 
-  async atualizaRegistro(dadosAtualizados, id) {
+  async atualizaRegistro(dadosAtualizados, where) {
     const ListaRegistroAtualizado = dataSouce[this.model].update(dadosAtualizados, {
-      where: { id: id }
+      where: { ...where }
     });
     if(ListaRegistroAtualizado[0] === 0) {
       return false;
