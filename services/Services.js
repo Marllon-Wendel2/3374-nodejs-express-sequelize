@@ -21,14 +21,10 @@ class Services {
     return dataSouce[this.model].findOne( { where: { ...where } });
   }
 
-  async pegaEContaRegistros(where) {
-    return dataSouce[this.model].findAndCountAll( { where:
-       { ...where },
-    limit: 2,
-    order: [['id', 'DESC']]
-    });
+  async pegaEContaRegistros(options) {
+    return dataSouce[this.model].findAndCountAll({ ...options });
   }
-
+  
   async criaRegistro(dadosDoRegistro) {
     return dataSouce[this.model].create(dadosDoRegistro);
   }
