@@ -14,6 +14,7 @@ class Controller {
     }
   }
 
+
   async criaNovo(req, res) {
     const dadosParaCriacao = req.body;
     try {
