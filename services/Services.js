@@ -1,4 +1,4 @@
-const dataSouce = require('../models');
+const dataSource = require('../models');
 
 class Services {
   constructor(nomeDoModel) {
@@ -6,33 +6,35 @@ class Services {
   }
 
   async pegaTodosOsRegistros(where = {}) {
-    return dataSouce[this.model].findAll({where: {...where}} );
+    return dataSource[this.model].findAll({where: {...where}} );
   }
 
   async pegaPorEscopo(escopo) {
-    return dataSouce[this.model].scope(escopo).findAll();
+    return dataSource[this.model].scope(escopo).findAll();
   }
 
   async pegaUmRegistroPorId(id) {
-    return dataSouce[this.model].findByPk(id);
+    return dataSource[this.model].findByPk(id);
   }
 
   async pegaUmRegistro(where) {
-    return dataSouce[this.model].findOne( { where: { ...where } });
+    return dataSource[this.model].findOne( { where: { ...where } });
   }
 
   async pegaEContaRegistros(options) {
-    return dataSouce[this.model].findAndCountAll({ ...options });
+    return dataSource[this.model].findAndCountAll({ ...options });
   }
   
   async criaRegistro(dadosDoRegistro) {
-    return dataSouce[this.model].create(dadosDoRegistro);
+    return dataSource[this.model].create(dadosDoRegistro);
   }
 
-  async atualizaRegistro(dadosAtualizados, where) {
-    const ListaRegistroAtualizado = dataSouce[this.model].update(dadosAtualizados, {
-      where: { ...where }
-    });
+  async atualizaRegistro(dadosAtualizados, where, transacao = {}) {
+    const ListaRegistroAtualizado = await dataSource[this.model]
+      .update(dadosAtualizados, {
+        where: { ...where },
+        transaction: transacao
+      });
     if(ListaRegistroAtualizado[0] === 0) {
       return false;
     }
@@ -40,7 +42,7 @@ class Services {
   }
 
   async excluiRegistro(id) {
-    return dataSouce[this.model].destroy({ where: { id: id } });
+    return dataSource[this.model].destroy({ where: { id: id } });
   }
 }
 
